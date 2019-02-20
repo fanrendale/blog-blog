@@ -1,0 +1,75 @@
+buildscript {
+    //ext用于定义动态属性
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    
+    //自定义Thymeleaf和Thymeleaf Layout Dialect的版本
+//    ext['thymeleaf.version'] = '3.0.3.RELEASE'
+//    ext['thymeleaf-layout-dialect.version'] = '2.2.0'
+    
+    //使用了Maven的中央仓库（你也可以指定其他仓库）
+    repositories {
+        //mavenCentral()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+    }
+
+    //依赖关系
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.xjf'
+version = '1.0.0'
+sourceCompatibility = '1.8'
+
+repositories {
+    //mavenCentral()
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+}
+
+dependencies {
+    //该依赖对于编译发行是必须的
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //该依赖对于编译测试时必须的，默认包含编译产品依赖和编译依赖
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //添加Thymeleaf的依赖
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.1.2.RELEASE'
+
+    //引入lombok
+//    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+
+    //引入jpa的依赖
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.1.2.RELEASE'
+
+    //引入mysql驱动的依赖
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+
+    //引入H2依赖
+    runtime group: 'com.h2database', name: 'h2', version: '1.4.197'
+
+    // 添加Apache Commons Lang依赖
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+
+    //引入spring-boot-starter-security依赖
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.2.RELEASE'
+
+    //引入thymeleaf-extras-springsecurity4依赖
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '3.0.2.RELEASE'
+
+    // 添加Markdown parse 依赖
+    compile group: 'es.nitaur.markdown', name: 'txtmark', version: '0.16'
+
+
+}
